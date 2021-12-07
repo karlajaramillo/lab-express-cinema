@@ -15,13 +15,12 @@ router.get('/movies', async (req, res, next) => {
     // find() --> with no arguments will find anything in the db
     console.log('in movies route')
     console.log(Movie)
-    const moviesFromDB = await Movie.find();
-    console.log('Retrieved movies from DB:', moviesFromDB);
+    const movies = await Movie.find();
+    // find() --> returns an array, but we need an object to pass it to handlebars--> { movie }
+    console.log('Retrieved movies from DB:', movies);
     // we call the render method after we obtain the books data from the database -> allTheBooksFromDB
     // return an Array, so then I can iterate through #each
-    res.render('movies/movies-list', { 
-      movies: moviesFromDB 
-    }); // pass `allTheMoviesFromDB` to the view (as a variable movies to be used in the HBS)
+    res.render('movies/movies-list', { movies }); // pass `allTheMoviesFromDB` to the view (as a variable movies to be used in the HBS)
   } catch(error) {
     console.log('Error while getting the movies from the DB: ', error);
  
@@ -41,7 +40,8 @@ router.get('/movie/:id', async (req, res, next) => {
     const { id } = req.params;
     const movie = await Movie.findById(id); // return an object
     //res.send(movie); // it's an object
-    // movie --> is the object, so let's pass the object directly wihouth { }
+    // movie --> is the object, so let's pass the object directly to hadlebars without { }
+    // if we pass {object} , an object inside an object, so we will need in handlebars--> movie.title...
     res.render('movies/movie-detail',  movie);
   } 
   catch(error) {

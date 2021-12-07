@@ -20,7 +20,7 @@ async function seedMovies() {
 
 seedMovies();
 
-// Before
+// Before - option 1
 // // To insert in "seeds/movies.seed.js"
 // const mongoose = require("mongoose");
 // const Movie = require("../models/Movie.model");
@@ -38,12 +38,14 @@ seedMovies();
 //   console.log('Deleting DB')
 //   // Before adding any recipes to the database, let's remove all existing ones
 //   return Movie.deleteMany();
+//   //return mongoose.connection.dropCollection('movies');
+
 // })
 // .then( async() => {
 //   try {
-//     // const deleteMovies =  mongoose.connection.dropCollection('movies');
 //     // console.log('Drop DB');
 //     const addMovies = await Movie.create(movies);
+//     const addMovies = await Movie.insertMany(movies);
 //     console.log(`Created ${addMovies.length} movies`);
 //     mongoose.connection.close();
 //   } catch(error) {
@@ -52,6 +54,8 @@ seedMovies();
 // }).catch(err => console.log(`An error occurs while creating the database ${err}`));
 
 
+
+// Another way
 // Add here the script that will be run to actually seed the database (feel free to refer to the previous lesson)
 // Create the Model
 
